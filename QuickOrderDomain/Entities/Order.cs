@@ -10,8 +10,8 @@ public class Order
     public decimal Total => Items.Sum(item => item.Price);
     public OrderStatus Status { get; set; }
     
-    public void AddItem(MenuItem menuItem, int quantity)
+    public void AddItem(DisheItem disheItem, int quantity)
     {
-        Items.Add(new OrderItem(menuItem, quantity));
+        Items.Add(new OrderItem(disheItem, quantity));
     }
 }

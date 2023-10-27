@@ -2,16 +2,16 @@
 
 public class OrderItem
 {
-    public OrderItem(MenuItem item, int quantity)
+    public OrderItem(DisheItem dishes, int quantity)
     {
         Id = Guid.NewGuid();
-        Item = item;
+        Dishes = dishes;
         Quantity = quantity;
     }
 
     public Guid Id { get; private set; }
-    public MenuItem Item { get; private set; }
+    public DisheItem Dishes { get; private set; }
     public int Quantity { get; private set; }
     
-    public decimal Price => Item.Price * Quantity;
+    public decimal Price => Dishes.Price * Quantity;
 }

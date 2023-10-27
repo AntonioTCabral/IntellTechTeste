@@ -1,8 +1,8 @@
 ﻿namespace QuickOrderDomain.Entities;
 
-public class MenuItem
+public class DisheItem
 {
-    public MenuItem(string name, decimal price, string description, string photoUrl, int servingSize)
+    public DisheItem(string name, decimal price, string description, string photoUrl, int servingSize)
     {
         Id = Guid.NewGuid();
         Name = name;
