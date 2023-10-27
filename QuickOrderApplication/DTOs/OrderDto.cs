@@ -1,3 +1,8 @@
-﻿namespace QuickOrderApplication.DTOs;
+﻿using QuickOrderDomain.Enums;
 
-public record OrderDto(List<DishSelectionDto> DishSelections, string Status);
+namespace QuickOrderApplication.DTOs;
+
+public class OrderDto
+{
+    public List<DishSelectionDto> DishSelections { get; set; }
+}

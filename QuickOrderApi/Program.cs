@@ -34,13 +34,15 @@ builder.Services.AddDbContext<QuickOrderContext>(options =>
 builder.Services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
 builder.Services.AddScoped<IDisheItemRepository, DisheItemRepository>();
 builder.Services.AddScoped<IDisheItemService, DisheItemService>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage();
+    app.UseSwaggerUI();
 }
 
 app.UseSwagger();

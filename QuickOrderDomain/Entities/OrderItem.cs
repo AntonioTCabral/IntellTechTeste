@@ -1,4 +1,6 @@
-﻿namespace QuickOrderDomain.Entities;
+﻿using System.Text.Json.Serialization;
+
+namespace QuickOrderDomain.Entities;
 
 public class OrderItem
 {
@@ -17,6 +19,12 @@ public class OrderItem
     public Guid Id { get; private set; }
     public DisheItem Dishes { get; private set; }
     public int Quantity { get; private set; }
+    public Guid OrderId { get; set; }
+    
+    [JsonIgnore]
+    public Order Order { get; set; }
     
     public decimal Price => Dishes.Price * Quantity;
+
+    
 }

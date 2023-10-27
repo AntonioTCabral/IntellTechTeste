@@ -6,19 +6,12 @@ namespace QuickOrderDomain.Entities;
 
 public class Order
 {
-    public Order()
-    {
-        Id = Guid.NewGuid();
-        OrderedAt = DateTime.Now;
-        Status = OrderStatus.Preparing;
-    }
     
-    
-    public Guid Id { get; private set; }
-    public DateTime OrderedAt { get; private set; }
+    public Guid Id { get; private set; } = Guid.NewGuid();
+    public DateTime OrderedAt { get; private set; } = DateTime.Now;
     public List<OrderItem> Items { get; private set; } = new();
     public decimal Total => Items.Sum(item => item.Price);
-    public OrderStatus Status { get; private set; }
+    public OrderStatus Status { get; private set; } = OrderStatus.Preparing;
 
     public void AddItem(DisheItem menuItem, int quantity)
     {

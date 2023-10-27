@@ -18,11 +18,13 @@ public class QuickOrderContext : DbContext
         modelBuilder.Entity<Order>().HasKey(x => x.Id);
         modelBuilder.Entity<Order>().Property(x => x.OrderedAt).IsRequired();
         modelBuilder.Entity<Order>().Property(x => x.Status).IsRequired();
-        modelBuilder.Entity<Order>().HasMany(x => x.Items).WithOne().OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<Order>().HasMany(x => x.Items).WithOne().HasForeignKey(o => o.Id).OnDelete(DeleteBehavior.Cascade);
         
-        modelBuilder.Entity<OrderItem>().HasKey(x => x.Id);
-        modelBuilder.Entity<OrderItem>().Property(x => x.Quantity).IsRequired();
-        modelBuilder.Entity<OrderItem>().HasOne(x => x.Dishes).WithMany().OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<OrderItem>()
+            .HasOne(oi => oi.Order)
+            .WithMany(o => o.Items)
+            .HasForeignKey(oi => oi.OrderId);
+        
         
         modelBuilder.Entity<DisheItem>().HasKey(x => x.Id);
         modelBuilder.Entity<DisheItem>().Property(x => x.Name).IsRequired();
