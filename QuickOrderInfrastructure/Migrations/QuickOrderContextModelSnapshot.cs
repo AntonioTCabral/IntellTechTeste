@@ -32,11 +32,11 @@ namespace QuickOrderInfrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhotoUrl")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -49,7 +49,7 @@ namespace QuickOrderInfrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MenuItems");
+                    b.ToTable("DisheItems");
                 });
 
             modelBuilder.Entity("QuickOrderDomain.Entities.Order", b =>

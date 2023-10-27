@@ -12,7 +12,7 @@ using QuickOrderInfrastructure.DataBase;
 namespace QuickOrderInfrastructure.Migrations
 {
     [DbContext(typeof(QuickOrderContext))]
-    [Migration("20231027164037_Initial")]
+    [Migration("20231027182836_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -35,11 +35,11 @@ namespace QuickOrderInfrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhotoUrl")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -52,7 +52,7 @@ namespace QuickOrderInfrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MenuItems");
+                    b.ToTable("DisheItems");
                 });
 
             modelBuilder.Entity("QuickOrderDomain.Entities.Order", b =>

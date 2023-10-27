@@ -38,12 +38,17 @@ builder.Services.AddScoped<IDisheItemService, DisheItemService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.UseSwagger();
-
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "QuickOrderApi v1");
+    c.RoutePrefix = string.Empty;
+});
 
 app.UseHttpsRedirection();
 

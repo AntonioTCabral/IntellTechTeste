@@ -12,19 +12,19 @@ namespace QuickOrderInfrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "MenuItems",
+                name: "DisheItems",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhotoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ServingSize = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MenuItems", x => x.Id);
+                    table.PrimaryKey("PK_DisheItems", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -53,9 +53,9 @@ namespace QuickOrderInfrastructure.Migrations
                 {
                     table.PrimaryKey("PK_OrderItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OrderItems_MenuItems_DishesId",
+                        name: "FK_OrderItems_DisheItems_DishesId",
                         column: x => x.DishesId,
-                        principalTable: "MenuItems",
+                        principalTable: "DisheItems",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -84,7 +84,7 @@ namespace QuickOrderInfrastructure.Migrations
                 name: "OrderItems");
 
             migrationBuilder.DropTable(
-                name: "MenuItems");
+                name: "DisheItems");
 
             migrationBuilder.DropTable(
                 name: "Orders");
