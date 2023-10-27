@@ -19,4 +19,9 @@ public class OrderRepository : RepositoryBase<Order>, IOrderRepository
 
         return result;
     }
+
+    public override Task<Order?> GetById(Guid id)
+    {
+        return _context.Orders.AsNoTracking().Include(x => x.Items).ThenInclude(o => o.Dishes).FirstOrDefaultAsync(x => x.Id == id);
+    }
 }

@@ -18,8 +18,8 @@ public class OrdersController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> PlaceOrder([FromBody] OrderDto order)
     {
-        await _orderService.PlaceOrderAsync(order);
-        return Ok();
+        var result = await _orderService.PlaceOrderAsync(order);
+        return Ok(result);
     }
     
     [HttpGet]

@@ -21,7 +21,7 @@ public class OrderService : IOrderService
         _hubContext = hubContext;
     }
 
-    public async Task PlaceOrderAsync(OrderDto order)
+    public async Task<Order> PlaceOrderAsync(OrderDto order)
     {
         var orderEntity = new Order();
         
@@ -35,11 +35,28 @@ public class OrderService : IOrderService
         }
         
         await _orderRepository.Add(orderEntity);
+        return orderEntity;
     }
 
-    public async Task<IEnumerable<Order>> GetAllAsync() => await _orderRepository.GetAll();
+    public async Task<IEnumerable<OrderResponseDto>> GetAllAsync()
+    {
+        var orders = await _orderRepository.GetAll();
+        
+        var orderResponse = orders.Select(order => new OrderResponseDto(order.Id, order.OrderedAt, order.Items, order.Total, order.Status.ToString()));
+        
+        return orderResponse;
+    }
 
-    public async Task<Order> GetByIdAsync(Guid id) => await _orderRepository.GetById(id);
+    public async Task<OrderResponseDto> GetByIdAsync(Guid id)
+    {
+        var order =  await _orderRepository.GetById(id);
+        
+        if (order == null) throw new Exception("Order not found.");
+        
+        var orderResponse = new OrderResponseDto(order.Id, order.OrderedAt, order.Items, order.Total, order.Status.ToString());
+
+        return orderResponse;
+    }
 
     public async Task DeleteAsync(Guid id)
     {
