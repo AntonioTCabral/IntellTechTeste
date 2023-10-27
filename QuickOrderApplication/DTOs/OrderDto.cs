@@ -1,3 +1,3 @@
 ﻿namespace QuickOrderApplication.DTOs;
 
-public record OrderDto(List<OrderItemDto> Items);
+public record OrderDto(List<DishSelectionDto> DishSelections, string Status);

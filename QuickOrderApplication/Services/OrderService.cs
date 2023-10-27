@@ -25,9 +25,9 @@ public class OrderService : IOrderService
     {
         var orderEntity = new Order();
         
-        foreach (var item in order.Items)
+        foreach (var item in order.DishSelections)
         {
-            var dishe = await _disheItemRepository.GetById(item.DisheId);
+            var dishe = await _disheItemRepository.GetById(item.Dish.Id);
             
             if (dishe == null) throw new Exception("Dishe not found.");
             
