@@ -8,5 +8,5 @@ public interface IDisheItemService
     Task<DisheItem?> GetByIdAsync(Guid id);
     Task AddAsync(DisheItem entity);
     Task UpdateAsync(DisheItem entity);
-    Task DeleteAsync(DisheItem entity);
+    Task DeleteAsync(Guid id);
 }

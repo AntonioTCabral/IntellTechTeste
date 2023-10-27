@@ -47,10 +47,10 @@ public class DishesController : ControllerBase
         return Ok();
     }
 
-    [HttpDelete]
-    public async Task<IActionResult> Delete([FromBody] DisheItem disheItem)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(Guid id)
     {
-        await _disheItemService.DeleteAsync(disheItem);
+        await _disheItemService.DeleteAsync(id);
         return Ok();
     }
 }

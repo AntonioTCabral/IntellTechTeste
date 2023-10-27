@@ -21,5 +21,9 @@ public class DisheItemService : IDisheItemService
 
     public async Task UpdateAsync(DisheItem entity) => await _disheRepository.Update(entity);
 
-    public async Task DeleteAsync(DisheItem entity) => await _disheRepository.Delete(entity);
+    public async Task DeleteAsync(Guid id)
+    {
+        var dishe = await _disheRepository.GetById(id);
+        await _disheRepository.Delete(dishe);
+    }
 }
