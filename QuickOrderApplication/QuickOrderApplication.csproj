@@ -10,4 +10,8 @@
       <ProjectReference Include="..\QuickOrderDomain\QuickOrderDomain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.4" />
+    </ItemGroup>
+
 </Project>

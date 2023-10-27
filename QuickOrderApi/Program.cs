@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using QuickOrderApplication.Interfaces.Repositories;
 using QuickOrderApplication.Interfaces.Services;
 using QuickOrderApplication.Services;
+using QuickOrderApplication.Services.SignalIR;
 using QuickOrderInfrastructure.DataBase;
 using QuickOrderInfrastructure.Repositories;
 
@@ -13,6 +14,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSignalR();
 
 // inside ConfigureServices method
 builder.Services.AddDbContext<QuickOrderContext>(options =>
@@ -36,5 +38,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<OrderStatusHub>("/orderhub");
 
 app.Run();

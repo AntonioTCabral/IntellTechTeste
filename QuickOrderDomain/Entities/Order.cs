@@ -24,6 +24,10 @@ public class Order
     {
         Items.Add(new OrderItem(menuItem, quantity));
     }
+    
+    public void UpdateStatus(OrderStatus status)
+    {
+        Status = status;
+    }
 
-        
 }

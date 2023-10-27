@@ -1,7 +1,10 @@
-﻿using QuickOrderApplication.DTOs;
+﻿using Microsoft.AspNetCore.SignalR;
+using QuickOrderApplication.DTOs;
 using QuickOrderApplication.Interfaces.Repositories;
 using QuickOrderApplication.Interfaces.Services;
+using QuickOrderApplication.Services.SignalIR;
 using QuickOrderDomain.Entities;
+using QuickOrderDomain.Enums;
 
 namespace QuickOrderApplication.Services;
 
@@ -9,11 +12,13 @@ public class OrderService : IOrderService
 {
     private readonly IOrderRepository _orderRepository;
     private readonly IDisheItemRepository _disheItemRepository;
+    private readonly IHubContext<OrderStatusHub> _hubContext;
 
-    public OrderService(IOrderRepository orderRepository, IDisheItemRepository disheItemRepository)
+    public OrderService(IOrderRepository orderRepository, IDisheItemRepository disheItemRepository, IHubContext<OrderStatusHub> hubContext)
     {
         _orderRepository = orderRepository;
         _disheItemRepository = disheItemRepository;
+        _hubContext = hubContext;
     }
 
     public async Task PlaceOrderAsync(OrderDto order)
@@ -41,5 +46,17 @@ public class OrderService : IOrderService
         var order = await _orderRepository.GetById(id);
         await _orderRepository.Delete(order);
     }
-    
+
+    public async Task UpdateStatusAsync(Guid id, OrderStatus status)
+    {
+        var orderEntity = await _orderRepository.GetById(id);
+        
+        if (orderEntity == null) throw new Exception("Order not found.");
+        
+        orderEntity.UpdateStatus(status);
+        
+        await _orderRepository.Update(orderEntity);
+        
+        await _hubContext.Clients.Group(id.ToString()).SendAsync("UpdateOrderStatus", orderEntity.Status.ToString());
+    }
 }
