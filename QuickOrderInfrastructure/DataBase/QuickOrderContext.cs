@@ -26,9 +26,9 @@ public class QuickOrderContext : DbContext
         
         modelBuilder.Entity<DisheItem>().HasKey(x => x.Id);
         modelBuilder.Entity<DisheItem>().Property(x => x.Name).IsRequired();
-        modelBuilder.Entity<DisheItem>().Property(x => x.Price).IsRequired();
+        modelBuilder.Entity<DisheItem>().Property(x => x.Price).HasColumnType("decimal(18, 2)").IsRequired();
         modelBuilder.Entity<DisheItem>().Property(x => x.Description).IsRequired();
-        modelBuilder.Entity<DisheItem>().Property(x => x.PhotoUrl).IsRequired();
+        modelBuilder.Entity<DisheItem>().Property(x => x.ImageUrl).IsRequired();
         modelBuilder.Entity<DisheItem>().Property(x => x.ServingSize).IsRequired();
 
         

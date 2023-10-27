@@ -16,6 +16,17 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSignalR();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+});
+
 // inside ConfigureServices method
 builder.Services.AddDbContext<QuickOrderContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -39,5 +50,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.MapHub<OrderStatusHub>("/orderhub");
-
+app.UseCors("AllowAllOrigins");
 app.Run();

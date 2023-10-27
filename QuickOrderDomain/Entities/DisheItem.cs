@@ -2,13 +2,13 @@
 
 public class DisheItem
 {
-    public DisheItem(string name, decimal price, string description, string photoUrl, int servingSize)
+    public DisheItem(string name, decimal price, string description, string imageUrl, string servingSize)
     {
         Id = Guid.NewGuid();
         Name = name;
         Price = price;
         Description = description;
-        PhotoUrl = photoUrl;
+        ImageUrl = imageUrl;
         ServingSize = servingSize;
     }
 
@@ -16,6 +16,6 @@ public class DisheItem
     public string Name { get; private set; }
     public decimal Price { get; private set; }
     public string Description { get; private set; }
-    public string PhotoUrl { get; private set; }
-    public int ServingSize { get; private set; }
+    public string ImageUrl { get; private set; }
+    public string ServingSize { get; private set; }
 }

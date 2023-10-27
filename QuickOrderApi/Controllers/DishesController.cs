@@ -22,7 +22,7 @@ public class DishesController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet]
+    [HttpGet("{id}")]
     public async Task<IActionResult> GetById(Guid id)
     {
         var result = await _disheItemService.GetByIdAsync(id);

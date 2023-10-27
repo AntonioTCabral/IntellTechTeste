@@ -9,6 +9,11 @@ public class OrderItem
         Quantity = quantity;
     }
 
+    public OrderItem()
+    {
+        Id = Guid.NewGuid();
+    }
+
     public Guid Id { get; private set; }
     public DisheItem Dishes { get; private set; }
     public int Quantity { get; private set; }
